@@ -34,23 +34,23 @@ datos_mes as(
 pago_mes as(
     select
         staff_id,
-        MONTH(payment_date) as mes,
-        YEAR(payment_date) as annio,
+        MONTH(payment_date) as mesp,
+        YEAR(payment_date) as anniop,
         sum(amount) as amount
     from 
         payment
     group by 
         staff_id,
-        mes,
-        annio    
+        mesp,
+        anniop    
 ),
 datos_mes_col_pago as(
     select
         staff_id,
         amount,
-        sum(case when annio=2005 and mes=5 then amount else 0 end) as mayo2005,
-        sum(case when annio=2005 and mes=6 then amount else 0 end) as junio2005,
-        sum(case when annio=2005 and mes=7 then amount else 0 end) as julio2005  
+        sum(case when anniop=2005 and mesp=5 then amount else 0 end) as mayo2005,
+        sum(case when anniop=2005 and mesp=6 then amount else 0 end) as junio2005,
+        sum(case when anniop=2005 and mesp=7 then amount else 0 end) as julio2005  
     from pago_mes
     group by 
         staff_id, 
