@@ -1,3 +1,9 @@
+use sakila;
+
+#repositorio: https://github.com/AuraAtuesta/mysql-sakila-aura.git
+# scripts -> pruebaa.sql
+# source /scripts/pruebaa.sql
+
 WITH datos AS (
         SELECT
                 CONCAT(district, ', ', city) as store,
@@ -10,7 +16,6 @@ WITH datos AS (
                 INNER JOIN store USING(address_id)
                 INNER JOIN staff USING(store_id)
                 INNER JOIN payment USING(staff_id)
-                INNER JOIN customer USING(customer_id)
             GROUP BY store, annio, mes
             HAVING annio=2005
     ),
@@ -37,10 +42,7 @@ WITH datos AS (
             YEAR(rental_date) as annio_a,
             count(*) as cantidad
         from rental
-            join customer using (customer_id)
             join inventory using (inventory_id)
-            join film using (film_id)
-            join staff using (staff_id)
             join store on inventory.store_id = store.store_id
             join address on store.address_id = address.address_id
             join city using (city_id)
